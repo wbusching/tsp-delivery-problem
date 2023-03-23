@@ -18,10 +18,19 @@ def cycle_length(g, cycle):
     # Checking that the number of vertices in the graph equals the number of vertices in the cycle.
     assert len(cycle) == g.number_of_nodes() # assert statement throws an exception if untrue ("sanity check")
     # Write your code here.
-    
+    cycle_weight = 0
 
+    for i in range(len(cycle)): # for each node in the cycle
+        v1 = cycle[i] # get the value of this node
+        try: 
+            v2 = cycle[i+1] # get the value of the next node
+        except: 
+            v2 = cycle[0] # if this node is the last in the cycle, the next node is the first one
 
-    return ???
+        edge_weight = g[v1][v2]["weight"] # obtain weight of the edge connecting v1 and v2
+        cycle_weight += edge_weight # add this edge weight to total cycle weight
+
+    return cycle_weight
     
 # Here is a test case:
 # Create an empty graph. 
@@ -39,5 +48,5 @@ g.add_edge(1, 3, weight = 1)
 cycle1 = [0, 1, 2, 3]
 cycle2 = [0, 2, 1, 3]
 
-# assert(cycle_length(g, cycle1) == 8)
-# assert(cycle_length(g, cycle2) == 6)
+assert(cycle_length(g, cycle1) == 8)
+assert(cycle_length(g, cycle2) == 6)
