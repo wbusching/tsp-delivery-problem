@@ -12,31 +12,24 @@ from random import choice
 # import our pre-built function to compute cycle weight!
 from cycleweight import cycle_weight 
 
-# This function takes as input a graph g.
-# The graph is complete (i.e., each pair of distinct vertices is connected by an edge),
-# undirected (i.e., the edge from u to v has the same weight as the edge from v to u),
-# and has no self-loops (i.e., there are no edges from i to i).
-#
-# The function should return the weight of a shortest Hamiltonian cycle.
-# (Don't forget to add up the last edge connecting the last vertex of the cycle with the first one.)
-#
-# You can iterate through all permutations of the set {0, ..., n-1} and find a cycle of the minimum weight.
 
 
 def brute_force_tsp(g):
-    # n is the number of vertices.
-    n = g.number_of_nodes()
+    """
+    This function takes as input a graph g, and returns the weight of a shortest Hamiltonian cycle
+    using a brute force algorithm that searches through all possible cycle weights to find the min.
+    """
+    n = g.number_of_nodes()                           # get number of vertices in g
 
-    # use the weight of a random permutation as the initial min_weight
-    # recall, this is very unlikely to be near-optimal
-    perms = permutations(range(n))               # `permutations` returns a container of all permutations, expressed as tuples
-    min_weight = cycle_weight(g, choice(list(perms)))  # compute cycle weight for a random permutation
+    perm_list = list(permutations(range(n)))          # obtain list of all permutations  
+    min_weight = cycle_weight(g, choice(perm_list))   # compute cycle weight for a random permutation, set as running min weight
+                                                      # ^recall, this randomly-chosen cycle weight is unlikely to be near optimal
 
-    for p in perms:     
-        p_weight = cycle_weight(g, p)    # compute the weight of the cycle represented by this permutation
+    for p in perm_list:     
+        p_weight = cycle_weight(g, p)                 # compute the weight of the cycle represented by this permutation
 
-        if (p_weight < min_weight):      # check if this weight is smaller than the running min weight
-            min_weight = p_weight        # update running min weight if so
+        if (p_weight < min_weight):                   # check if this weight is smaller than the running min weight
+            min_weight = p_weight                     # update running min weight if so
 
     return min_weight
 
@@ -63,4 +56,5 @@ if __name__ == "__main__":
     assert(cycle_weight(g, cycle2) == 6)
     
 
-    print(brute_force_tsp(g))
+    min_weight_cycle = brute_force_tsp(g)
+    print(min_weight_cycle)
