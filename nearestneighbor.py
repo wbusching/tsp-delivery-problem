@@ -1,4 +1,9 @@
 """
+This function implements the nearest neighbor algorithm, 
+a greedy algorithm for finding the solution to the TSP.
+Note that this algorithm is efficient, executing in 
+polynomial time.
+
 This function takes as input a graph g.
 The graph is complete (i.e., each pair of distinct vertices is connected by an edge),
 undirected (i.e., the edge from u to v has the same weight as the edge from v to u),
@@ -33,7 +38,6 @@ def nearest_neighbors(g):
                     next_node = v
                     min_edge = new_edge_weight
             
-
         assert next_node is not None
         path.append(next_node)
         current_node = next_node
