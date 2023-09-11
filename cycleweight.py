@@ -45,7 +45,7 @@ if __name__ == "__main__":
     g.add_edge(0, 2, weight = 1)
     g.add_edge(1, 3, weight = 1)
 
-    # Now we want to compute the lengths of two cycles:
+    # We now want to compute the lengths of two cycles:
     cycle1 = [0, 1, 2, 3]
     cycle2 = [0, 2, 1, 3]
 
